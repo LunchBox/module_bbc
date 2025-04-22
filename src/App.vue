@@ -1,17 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <div v-if="loading">Loading...</div>
+    <ClientIndex v-if="view === 'client_index'"></ClientIndex>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ClientIndex from "./views/Client/ClientIndex.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    ClientIndex,
+  },
+  data() {
+    return {
+      loading: true,
+      user: null,
+      view: null,
+    };
+  },
+  async created() {},
+  methods: {},
+  mounted() {
+    this.loading = false;
+    this.view = "client_index";
+  },
+};
 </script>
 
 <style>
@@ -19,8 +34,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
