@@ -1,11 +1,25 @@
 <template>
   <div class="client-index">
     <MyPackages v-if="view === 'my_packages'"></MyPackages>
-    <SendPackage v-if="view === 'send_package'"></SendPackage>
+
+    <SendPackage v-else-if="view === 'send_package'"></SendPackage>
+
     <TrackPackage
-      v-if="view === 'track_package'"
+      v-else-if="view === 'track_package'"
       :trackingNumber="trackingNumber"
     ></TrackPackage>
+
+    <SignIn
+      v-else-if="view === 'sign_in'"
+      @to-signup="view = 'sign_up'"
+      @signin-success="onSigninSuccess"
+    ></SignIn>
+
+    <SignUp
+      v-else-if="view === 'sign_up'"
+      @to-signin="view = 'sign_in'"
+    ></SignUp>
+
     <div v-else>
       <div class="track-form">
         <input
@@ -32,11 +46,20 @@ import MyPackages from "./MyPackages.vue";
 import SendPackage from "./SendPackage.vue";
 import TrackPackage from "./TrackPackage.vue";
 
+import SignIn from "./SignIn.vue";
+import SignUp from "./SignUp.vue";
+
+import { useAuth } from "@/services/useAuth";
+
+const { clientToken } = useAuth();
+
 export default {
   components: {
     MyPackages,
     SendPackage,
     TrackPackage,
+    SignIn,
+    SignUp,
   },
   data() {
     return {
@@ -51,10 +74,22 @@ export default {
       this.view = "track_package";
     },
     goToSendPackage() {
-      this.view = "send_package";
+      if (clientToken()) {
+        this.view = "send_package";
+      } else {
+        this.view = "sign_in";
+      }
     },
     goToMyPackages() {
-      this.view = "my_packages";
+      if (clientToken) {
+        this.view = "my_packages";
+      } else {
+        this.view = "sign_in";
+      }
+    },
+    onSigninSuccess() {
+      console.log("--- here");
+      this.view = null;
     },
   },
 };

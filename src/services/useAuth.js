@@ -13,10 +13,11 @@ export function useAuth() {
     try {
       const response = await fetch(`${API_URL}/api/v1/auth/signin`, {
         method: "POST",
-        data: {
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           email,
           password,
-        },
+        }),
       });
       const json = await response.json();
       localStorage.setItem("clientToken", json.data.token);
@@ -34,7 +35,8 @@ export function useAuth() {
     try {
       const response = await fetch(`${API_URL}/api/v1/auth/signup`, {
         method: "POST",
-        data: userData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
       });
       const json = await response.json();
       localStorage.setItem("clientToken", json.data.token);
@@ -52,10 +54,11 @@ export function useAuth() {
     try {
       const response = await fetch(`${API_URL}/api/v1/staff/signin`, {
         method: "POST",
-        data: {
+        headers: { "Content-Type": "application/json" },
+        data: JSON.stringify({
           email,
           password,
-        },
+        }),
       });
       const json = await response.json();
 
