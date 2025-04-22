@@ -31,7 +31,8 @@ export function usePackages() {
         `${API_URL}/api/v1/package?token=${clientToken()}`,
         {
           method: "POST",
-          data: packageData,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(packageData),
         }
       );
       const json = await response.json();
@@ -107,7 +108,8 @@ export function usePackages() {
         `${API_URL}/api/v1/courier/package/pickup/carry?token=${staffToken()}`,
         {
           method: "POST",
-          data: { package_id_list: packageIds },
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ package_id_list: packageIds }),
         }
       );
       const json = await response.json();
