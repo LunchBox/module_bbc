@@ -1,32 +1,11 @@
 <template>
   <div>
-    <div v-if="loading">Loading...</div>
-    <ClientIndex v-if="view === 'client_index'"></ClientIndex>
+    <MapEditor></MapEditor>
   </div>
 </template>
 
-<script>
-import ClientIndex from "./views/Client/ClientIndex.vue";
-
-export default {
-  name: "App",
-  components: {
-    ClientIndex,
-  },
-  data() {
-    return {
-      loading: true,
-      user: null,
-      view: null,
-    };
-  },
-  async created() {},
-  methods: {},
-  mounted() {
-    this.loading = false;
-    this.view = "client_index";
-  },
-};
+<script setup>
+import MapEditor from "@/views/map_editor/MapEditor.vue";
 </script>
 
 <style>
