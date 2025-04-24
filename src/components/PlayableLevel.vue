@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, watch, onUnmounted } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 import MapGrid from "@/components/MapGrid.vue";
 
 import useEventListener from "@/utils/useEventListener";

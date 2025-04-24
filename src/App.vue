@@ -1,11 +1,19 @@
 <template>
   <div>
-    <MapEditor></MapEditor>
+    <GameDemo v-if="view === 'demo'"></GameDemo>
+    <MapEditor @goto="showView"></MapEditor>
   </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
 import MapEditor from "@/views/map_editor/MapEditor.vue";
+import GameDemo from "@/views/GameDemo.vue";
+
+const view = ref(null);
+function showView(v) {
+  view.value = v;
+}
 </script>
 
 <style>

@@ -35,14 +35,14 @@ const emit = defineEmits("goto");
 function toHome() {
   if (!confirm("Map changes are not saved.Doyou want to return?")) return;
   // router.push({ path: "/" });
-  emit("goto", "/");
+  emit("goto", "home");
 }
 
 function toDemo() {
   if (!validMap()) return alert("关卡中包含至少一个 Start 和一个Spawn Point");
   selectedTool.value = null;
   // router.push({ path: "/demo" });
-  emit("goto", "/");
+  emit("goto", "demo");
 }
 
 // ---- map editor
